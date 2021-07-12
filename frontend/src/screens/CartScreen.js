@@ -21,7 +21,6 @@ const CartScreen = ({ match, location, history }) => {
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
 
-    console.log(history);
 
     useEffect(() => {
         if (productId) {

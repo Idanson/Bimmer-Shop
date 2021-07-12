@@ -11,28 +11,28 @@ const reviewSchema = mongoose.Schema({
 const productSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        requierd: true,
+        required: true,
         ref: 'User'
     },
     name: {
         type: String,
-        requierd: true
+        required: true
     },
     image: {
         type: String,
-        requierd: true,
+        required: true,
     },
     brand: {
         type: String,
-        requierd: true
+        required: true
     },
     category: {
         type: String,
-        requierd: true,
+        required: true,
     },
     description: {
         type: String,
-        requierd: true,
+        required: true,
     },
     reviews: [reviewSchema],
     rating: {

@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const orderSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        requierd: true,
+        required: true,
         ref: 'User'
     },
     orderItems: [{
@@ -13,7 +13,7 @@ const orderSchema = mongoose.Schema({
         price: { type: Number, requierd: true },
         product: {
             type: mongoose.Schema.Types.ObjectId,
-            requierd: true,
+            required: true,
             ref: 'Product'
         },
     }],
@@ -25,7 +25,7 @@ const orderSchema = mongoose.Schema({
     },
     paymentMethod: {
         type: String,
-        requierd: true
+        required: true
     },
     paymentResult: {
         id: { type: String },
@@ -35,22 +35,22 @@ const orderSchema = mongoose.Schema({
     },
     taxPrice: {
         type: Number,
-        requierd: true,
+        required: true,
         default: 0.0,
     },
     shippingPrice: {
         type: Number,
-        requierd: true,
+        required: true,
         default: 0.0,
     },
     totalPrice: {
         type: Number,
-        requierd: true,
+        required: true,
         default: 0.0,
     },
     isPaid: {
         type: Boolean,
-        requierd: true,
+        required: true,
         default: false,
     },
     paidAt: {
@@ -58,7 +58,7 @@ const orderSchema = mongoose.Schema({
     },
     isDelivered: {
         type: Boolean,
-        requierd: true,
+        required: true,
         default: false,
     },
     deliveredAt: {
