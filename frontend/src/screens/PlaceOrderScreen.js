@@ -10,16 +10,22 @@ import { createOrder } from '../actions/orderActions'
 const PlaceOrderScreen = ({history}) => {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
+
 // Calculate Prices
-    cart.itemsPrice = cart.cartItems.reduce(
-     (acc, item) => acc + item.price * item.qty, 
-      0
-    )
+const addDecimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2)
+}
+    cart.itemsPrice = addDecimals(
+        cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+        )
 
-    cart.shippingPrice = cart.itemsPrice > 100 ? 0 : 20
-        cart.taxPrice = Number((cart.itemsPrice * 0.17).toFixed(2))
-        cart.totalPrice = Number(cart.itemsPrice + cart.taxPrice + cart.shippingPrice).toFixed(2)
-
+    cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 20)
+        cart.taxPrice = addDecimals(Number((0.17 * cart.itemsPrice).toFixed(2)))
+        cart.totalPrice = ((
+            Number(cart.itemsPrice) + 
+            Number(cart.shippingPrice) +
+            Number(cart.taxPrice)
+            ).toFixed(2))
 
         const orderCreate = useSelector(state => state.orderCreate)
         const { order, success, error } = orderCreate
@@ -85,7 +91,7 @@ const PlaceOrderScreen = ({history}) => {
                                              </Link>
                                              </Col>
                                              <Col md={4}>
-                                                 {item.qty} x ${item.price} = ${item.qty * item.price}
+                                                 {item.qty} x ${item.price} = ${(item.qty * item.price).toFixed(2)}
                                              </Col>
                                          </Row>
                                      </ListGroup.Item>
