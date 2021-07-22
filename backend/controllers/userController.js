@@ -129,8 +129,8 @@ const deleteUser = asyncHandler(async(req, res) => {
     }
 })
 
-// @desc    Delete user by ID
-// @route   DELETE /api/users/:id
+// @desc    Get user by ID
+// @route   GET /api/users/:id
 // @access  Private/Admin
 const getUserById = asyncHandler(async(req, res) => {
     const user = await User.findById(req.params.id).select('-password')
@@ -153,7 +153,7 @@ const updateUser = asyncHandler(async(req, res) => {
     if (user) {
         user.name = req.body.name || user.name
         user.email = req.body.email || user.email
-        user.isAdmin = req.body.isAdmin || user.isAdmin
+        user.isAdmin = Boolean(req.body.isAdmin);
 
         const updatedUser = await user.save()
 
